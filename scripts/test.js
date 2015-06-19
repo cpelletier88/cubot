@@ -62,7 +62,7 @@ module.exports = function(robot) {
     		var hours = now.hours();
     		var minutes = now.minutes();
 
-    		if(hours > 17 || (hours > 16 && minutes > 30)) {
+    		if(hours > 17 || (hours >= 16 && minutes > 30)) {
     			msg.send('I would love to play!');
     		} else {
     			msg.send('Shouldn\'t you be working? (areyoukiddingme)')
