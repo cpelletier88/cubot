@@ -32,4 +32,14 @@ module.exports = function(robot) {
         msg.send('Today lunch is ' + lunchChoices[daysFromStartPoint]);
 
     });
+
+    robot.hear(/what time is it/i, function(msg){
+
+    	var moment = require('moment');
+
+    	now = moment();
+
+    	msg.send(now.format('MMMM Do YYYY, h:mm:ss a'));
+    });
+
 }
