@@ -28,7 +28,7 @@ module.exports = function(robot) {
 			case 'development':
 				hostname = 'api-dev.signnow.com';
 				break;
-			case 'development':
+			case 'rc':
 				hostname = 'api-rc.signnow.com';
 				break;	
 			default:
