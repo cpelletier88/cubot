@@ -4,4 +4,8 @@ module.exports = function(robot) {
     		res.send("Leave me alone " + res.message.user.name + ' (trolletan)');
     	}
     });
+
+    robot.hear(/\(tableflip\)/i, function(res) {
+    	res.reply("Please Respect Tables   ┬─┬ノ(ಠ_ಠノ)");
+    });
 };
