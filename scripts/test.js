@@ -26,7 +26,7 @@ module.exports = function(robot) {
 			'Nothing'
 		];
 
-		var now = moment().tz("America/Los_Angeles");
+		var now = moment().subtract(7, 'hours');
 		var daysFromStartPoint = Math.abs(moment('June 8, 2015').diff(now, 'days'));
 		daysFromStartPoint = daysFromStartPoint % lunchChoices.length;
 
@@ -38,7 +38,7 @@ module.exports = function(robot) {
 
     	var moment = require('moment');
 
-    	now = moment().tz("America/Los_Angeles");
+    	now = moment().subtract(7, 'hours');
 
     	msg.send(now.format('MMMM Do YYYY, h:mm:ss a'));
     });
