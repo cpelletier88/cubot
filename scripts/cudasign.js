@@ -17,6 +17,15 @@ module.exports = function(robot) {
 			case 'eval':
 				hostname = 'capi-eval.signnow.com';
 				break;
+			case 'evaluation':
+				hostname = 'capi-eval.signnow.com';
+				break;
+			case 'dev':
+				hostname = 'mw-dev.signnow.com';
+				break;
+			case 'development':
+				hostname = 'mw-dev.signnow.com';
+				break;
 			default:
 				hostname = 'capi-eval.signnow.com';
 				break;
