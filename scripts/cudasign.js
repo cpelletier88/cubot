@@ -21,10 +21,10 @@ module.exports = function(robot) {
 				hostname = 'capi-eval.signnow.com';
 				break;
 			case 'dev':
-				hostname = 'mw-dev.signnow.com';
+				hostname = 'dev.api.signnow.com';
 				break;
 			case 'development':
-				hostname = 'mw-dev.signnow.com';
+				hostname = 'dev.api.signnow.com';
 				break;
 			default:
 				hostname = 'capi-eval.signnow.com';
