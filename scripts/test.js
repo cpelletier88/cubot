@@ -51,6 +51,6 @@ module.exports = function(robot) {
     });
 
     robot.respond(/debug information/i, function(msg){
-    	msg.send(msg);
+    	msg.reply(msg);
     });
 }
