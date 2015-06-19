@@ -4,8 +4,10 @@ var https = require('https');
 module.exports = function(robot) {
 
 	function getEncodedToken(env) {
-		if(env === 'eval' || !process.env.CS_CLIENT_ID) {
+		if(env === 'eval' || env === 'evaluation') {
 			return 'MGZjY2RiYzczNTgxY2EwZjliZjhjMzc5ZTZhOTY4MTM6MzcxOWExMjRiY2ZjMDNjNTM0ZDRmNWMwNWI1YTE5NmI=';
+		} else if(env === 'rc') {
+			return (new Buffer(process.env.CS_RC_CLIENT_ID + ':' + process.env.CS_RC_CLIENT_SECRET).toString('base64'));
 		} else {
 			return (new Buffer(process.env.CS_CLIENT_ID + ':' + process.env.CS_CLIENT_SECRET).toString('base64'));
 		}
@@ -26,6 +28,9 @@ module.exports = function(robot) {
 			case 'development':
 				hostname = 'api-dev.signnow.com';
 				break;
+			case 'development':
+				hostname = 'api-rc.signnow.com';
+				break;	
 			default:
 				hostname = 'capi-eval.signnow.com';
 				break;
@@ -77,6 +82,7 @@ module.exports = function(robot) {
 						res.reply(d.toString('utf8'));
 					});
 		    	});
+		    	console.log(req);
 
 		    	req.write(data);
 		    	req.end();
