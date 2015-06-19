@@ -55,6 +55,18 @@ module.exports = function(robot) {
     });
 
 
+    robot.hear(/smash?/i, function(msg){
+    	if (msg.message.room === 'super_smash_brothers') {
+    		msg.send('I would love to play!');
+    	}
+
+    	return;
+    });
+
+    robot.hear(/thanks cubot/i, function(msg){
+    	msg.send('My duty is to serve you.');
+    });
+
     robot.respond(/debug (.*)/i, function(msg){
     	var inspectStuff;
     	var arguments = msg.match[1].split('.');
