@@ -1,4 +1,8 @@
 module.exports = function(robot) {
+
+	var util;
+	util = require('util');
+
     robot.respond(/(\bhug\b|\bhugs\b)/i, function(msg){
 
         msg.reply("(heart)");
@@ -50,7 +54,22 @@ module.exports = function(robot) {
     	}, 1500);
     });
 
+
     robot.respond(/debug information/i, function(msg){
-    	msg.reply(JSON.stringify(msg));
+    	var robot, user, room, text;
+
+    	function displayInfo(inspectValue) {
+    		if (msg[inspectValue]) {
+    			var inspectInfo = util.inspect(msg[inspectValue]);
+
+    			msg.reply('info about ' + inspectValue);
+    			msg.reply('/code ' + inspectInfo);
+    		}
+    	}
+
+    	displayInfo('robot');
+		displayInfo('user');
+		displayInfo('text');
+		displayInfo('room');
     });
 }

@@ -20,7 +20,8 @@
     "hubot-scripts": "^2.16.1",
     "hubot-shipit": "^0.2.0",
     "lodash": "^3.9.3",
-    "moment": "^2.10.3"
+    "moment": "^2.10.3",
+    "util": "^0.10.3"
   },
   "engines": {
     "node": "0.10.x"
