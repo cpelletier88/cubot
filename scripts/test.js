@@ -54,6 +54,8 @@ module.exports = function(robot) {
     	var user = msg.user;
     	var text = msg.text;
     	var id = msg.id;
-    	msg.send(user, text, id);
+    	msg.send(user);
+    	msg.send(id);
+    	msg.send(text);
     });
 }
