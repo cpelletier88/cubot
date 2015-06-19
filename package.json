@@ -2,10 +2,10 @@
   "name": "cubot",
   "version": "0.0.0",
   "private": true,
-  "author": "cpelletier@barracuda.com",
-  "description": "I pass the butter.",
+  "author": "Chris Pelletier <cpelletier@barracuda.com>",
+  "description": "A cudasign hubot implementation for cudasign",
   "dependencies": {
-    "hubot": "^2.13.1",
+    "hubot": "^2.13.2",
     "hubot-diagnostics": "0.0.1",
     "hubot-google-images": "^0.1.5",
     "hubot-google-translate": "^0.2.0",
@@ -21,8 +21,5 @@
   },
   "engines": {
     "node": "0.10.x"
-  },
-  "scripts": {
-    "start": "PORT=$OPENSHIFT_NODEJS_PORT BIND_ADDRESS=$OPENSHIFT_NODEJS_IP HEROKU_URL=$OPENSHIFT_APP_DNS REDIS_URL=redis://:$REDIS_PASSWORD@$OPENSHIFT_REDIS_HOST:$OPENSHIFT_REDIS_PORT bin/hubot -n cubot -a hipchat"
   }
 }
