@@ -55,19 +55,40 @@ module.exports = function(robot) {
     });
 
 
-    robot.respond(/debug information/i, function(msg){
-    	var robot, user, room, text;
+    robot.respond(/debug (.*)/i, function(msg){
+    	var inspectStuff;
+    	var arguments = msg.match[1].split('.');
 
-    	function displayInfo(inspectValue) {
-    		if (msg[inspectValue]) {
-    			var inspectInfo = util.inspect(msg[inspectValue]);
+    	function displayInfo(inspectStuff) {
+    		if (inspectStuff) {
+    			var inspectInfo = util.inspect(inspectStuff);
 
-    			msg.reply('info about ' + inspectValue);
+    			msg.send('info about ' + msg.match[1]);
     			msg.send('/code ' + inspectInfo);
     		}
     	}
 
-    	displayInfo('robot');
-		displayInfo('message');
+   		if (arguments.length === 1) {
+   			if(msg[arguments[0]]) {
+   				displayInfo(msg[arguments[0]]);
+   			} else {
+   				msg.send('That information was not found');
+   			}
+   		} else if (arguments.length === 2) {
+			if(msg[arguments[0]] && msg[arguments[0]][arguments[1]]) {
+				displayInfo(msg[arguments[0]][arguments[1]]);
+			} else {
+   				msg.send('That information was not found');
+   			}
+   		} else if (arguments.length === 3) {
+			if(msg[arguments[0]] && msg[arguments[0]][arguments[1]]  && msg[arguments[0]][arguments[1]][arguments[2]]) {
+				displayInfo(msg[arguments[0]][arguments[1]][arguments[2]]);
+			} else {
+   				msg.send('That information was not found');
+   			}
+   		} else {
+   			msg.send('I don\'t understand');
+   		}
+    	
     });
 }
