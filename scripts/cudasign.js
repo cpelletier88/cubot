@@ -21,10 +21,10 @@ module.exports = function(robot) {
 				hostname = 'capi-eval.signnow.com';
 				break;
 			case 'dev':
-				hostname = 'dev.api.signnow.com';
+				hostname = 'api-dev.signnow.com';
 				break;
 			case 'development':
-				hostname = 'dev.api.signnow.com';
+				hostname = 'api-dev.signnow.com';
 				break;
 			default:
 				hostname = 'capi-eval.signnow.com';
@@ -73,12 +73,9 @@ module.exports = function(robot) {
 		    	}
 
 		    	var req = https.request(options, function(httpResponse) {
-		    		console.log("statusCode: ", httpResponse.statusCode);
-						console.log("headers: ", httpResponse.headers);
-
-						httpResponse.on('data', function(d) {
-							res.reply(d.toString('utf8'));
-						});
+					httpResponse.on('data', function(d) {
+						res.reply(d.toString('utf8'));
+					});
 		    	});
 
 		    	req.write(data);
