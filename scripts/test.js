@@ -73,7 +73,17 @@ module.exports = function(robot) {
     });
 
     robot.hear(/thanks cubot/i, function(msg){
-    	msg.send('My duty is to serve you.');
+    	var thanks = [
+    		'My duty is to serve you.',
+    		'No problem! :)',
+    		'You are welcome.',
+    		'You should thanks @ChrisPelletier.',
+    		'I am just following my programming.',
+    		'Yup!',
+    		'I am just doing my job.'
+    	];
+
+    	msg.send(msg.random(thanks));
     });
 
     robot.respond(/debug (.*)/i, function(msg){
