@@ -60,13 +60,17 @@ module.exports = function(robot) {
 
 		    	var options = {
 		    		hostname: getHostName(env),
-		    		path: '/api/user',
+		    		path: '/user',
 		    		method: 'POST',
 		    		headers: {
 		    			"Authorization": "Basic " + getEncodedToken(env),
 		    			"User-Agent": "My Cubot app"
 		    		}
 		    	};
+
+		    	if (env === 'eval') {
+		    		options.path = '/api/user';
+		    	}
 
 		    	var req = https.request(options, function(httpResponse) {
 		    		console.log("statusCode: ", httpResponse.statusCode);
