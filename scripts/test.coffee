@@ -1,3 +1,3 @@
 module.exports = (robot) ->
-  robot.hear /hug/i, (res) ->
+  robot.hear /(\bhug\b|\bhugs\b)/i, (res) ->
     res.send "(heart)"
