@@ -45,8 +45,8 @@ module.exports = function(robot) {
 
     robot.hear(/RIP cubot/i, function(msg){
     	msg.send('What is dead may never die');
-    	return setInterval(function() {
+    	return setTimeout(function() {
     		return msg.send('but rises again, harder and stronger');
-    	}, 1000);
+    	}, 1500);
     });
 }
