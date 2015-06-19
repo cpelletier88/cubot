@@ -63,7 +63,7 @@ module.exports = function(robot) {
     		if (inspectStuff) {
     			var inspectInfo = util.inspect(inspectStuff);
 
-    			msg.send('info about ' + msg.match[1]);
+    			msg.send('info about response.' + msg.match[1]);
     			msg.send('/code ' + inspectInfo);
     		}
     	}
