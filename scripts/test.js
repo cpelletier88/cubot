@@ -51,11 +51,6 @@ module.exports = function(robot) {
     });
 
     robot.respond(/debug information/i, function(msg){
-    	var user = msg.user;
-    	var text = msg.text;
-    	var id = msg.id;
-    	msg.send(user);
-    	msg.send(id);
-    	msg.send(text);
+    	msg.send(msg);
     });
 }
