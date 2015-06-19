@@ -57,7 +57,15 @@ module.exports = function(robot) {
 
     robot.hear(/smash?/i, function(msg){
     	if (msg.message.room === 'super_smash_brothers') {
-    		msg.send('I would love to play!');
+    		var moment = require('moment');
+    		var hours = moment.hours();
+    		var minutes = moment.minutes();
+
+    		if(hours > 17 || (hours > 16 && minutes > 30)) {
+    			msg.send('I would love to play!');
+    		} else {
+    			msg.send('Shouldn\'t you be working? (areyoukiddingme)')
+    		}
     	}
 
     	return;
