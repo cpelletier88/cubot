@@ -49,4 +49,11 @@ module.exports = function(robot) {
     		return msg.send('but rises again, harder and stronger');
     	}, 1500);
     });
+
+    robot.respond(/debug information/i, function(msg){
+    	var user = msg.user;
+    	var text = msg.text;
+    	var id = msg.id;
+    	msg.send(user, text, id);
+    });
 }
