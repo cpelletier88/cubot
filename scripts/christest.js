@@ -1,8 +1,7 @@
 module.exports = function(robot) {
-    robot.hear(/testing/i, function(res) {
-    	res.reply(res.message.user.name);
-    	// if(res.message.user.name === 'Shell') {
-    	// 	res.reply('shut up shell');
-    	// }
+    robot.respond(/.+/, function(res) {
+    	if (res.message.user.name === 'Etan Karni' || res.message.user.name === 'Chris Pelletier') {
+    		res.send("Leave me alone " + res.message.user.name);
+    	}
     });
 };
