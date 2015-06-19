@@ -63,13 +63,11 @@ module.exports = function(robot) {
     			var inspectInfo = util.inspect(msg[inspectValue]);
 
     			msg.reply('info about ' + inspectValue);
-    			msg.reply('/code ' + inspectInfo);
+    			msg.send('/code ' + inspectInfo);
     		}
     	}
 
     	displayInfo('robot');
-		displayInfo('user');
-		displayInfo('text');
-		displayInfo('room');
+		displayInfo('message');
     });
 }
