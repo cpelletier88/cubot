@@ -13,6 +13,10 @@ module.exports = function(robot) {
 
     	var passedDay = msg.match[1];
 
+    	if(passedDay) {
+    		passedDay = passedDay.replace(/[\.,-\/#!$%@\^&\*;:{}=\-_`~()\?]/g,'');
+    	}
+
     	var moment = require('moment');
     	var _ = require('lodash');
 
@@ -50,13 +54,13 @@ module.exports = function(robot) {
 			now.add(1, 'day'); 		
 		}
 
-		if ( _.indexOf(dayNames, passedDay.toLowerCase()) !== -1) {
+		if (passedDay && _.indexOf(dayNames, passedDay.toLowerCase()) !== -1) {
 
 			if(passedDay.toLowerCase() === 'sunday' || passedDay.toLowerCase() === 'saturday') {
 				msg.send('It\'s the weekend!  Eat whatever you want! (lol)');
 				return;
 			}
-			
+
 			var today = moment().day();
 			var passedDayValue = _.indexOf(dayNames, passedDay.toLowerCase());
 
@@ -67,6 +71,9 @@ module.exports = function(robot) {
 
 				now.add(daysToOffset, 'day');
 			}
+		} else if (passedDay) {
+			msg.send('I don\'t understand what ' + passedDay + ' is.');
+			return;
 		}
 
 		var daysFromStartPoint = Math.abs(moment('June 8, 2015').diff(now, 'days'));
