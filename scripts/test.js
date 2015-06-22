@@ -14,7 +14,7 @@ module.exports = function(robot) {
     	var passedDay = msg.match[1];
 
     	if(passedDay) {
-    		passedDay = passedDay.replace(/[\.,-\/#!$%@\^&\*;:{}=\-_`~()\?]/g,'');
+    		passedDay = passedDay.replace(/[\.,-\/#!$%@\^&\*;:{}=\-_`~()\?on ]/g,'');
     	}
 
     	var moment = require('moment');
