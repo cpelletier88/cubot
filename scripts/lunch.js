@@ -1,5 +1,5 @@
 module.exports = function(robot) {
-	    robot.hear(/what is for lunch|what is for lunch (.*)/i, function(msg){
+	    robot.hear(/what is for lunch (.*)/i, function(msg){
 
 	    	var passedDay = msg.match[1];
 
@@ -61,7 +61,7 @@ module.exports = function(robot) {
 
 					now.add(daysToOffset, 'day');
 				}
-			} else if (passedDay) {
+			} else if (passedDay && passedDay !== 'today' && passedDay !== 'tomorrow') {
 				msg.send('I don\'t understand what ' + passedDay + ' is.');
 				return;
 			}
