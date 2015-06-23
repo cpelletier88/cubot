@@ -96,9 +96,11 @@ module.exports = function(robot) {
 
     robot.hear(/notify robots (.*)/i, function(res){
 
+      var arguments = res.match[1].split('|');
+
       var data = JSON.stringify({
-          color: 'random',
-          message: res.match[1],
+          color: arguments[0],
+          message: arguments[1],
           notify: 'false',
           message_format: 'text'
         });
