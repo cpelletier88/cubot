@@ -11,17 +11,17 @@ module.exports = function(robot) {
 	    	var _ = require('lodash');
 
 			var lunchChoices = [
-				'Greek',
-				'Mexican',
+				'Greek food',
+				'Mexican Food',
 				'BBQ',
-				'Japanese',
+				'Japanese food',
 				'Burgers',
 				'Nothing',
 				'Nothing',
-				'Chinese',
-				'Mexican',
+				'Chinese food',
+				'Mexican food',
 				'Sandwiches',
-				'Thai',
+				'Thai food',
 				'Pizza',
 				'Nothing',
 				'Nothing'
