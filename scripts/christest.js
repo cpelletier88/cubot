@@ -9,11 +9,15 @@ module.exports = function(robot) {
 	];
 
     robot.respond(/.+/i, function(res) {
-    	if (res.message.user.name === 'Etan Karni' || res.message.user.name === 'Shell') {
+    	if (res.message.user.name === 'Etan Karni') {
     		var response = res.random(etanResponses);
     		var compiled = _.template(response);
     		res.send(compiled({'user': res.message.user.name}));
     	}
+    });
+
+    robot.respond(/(you are|you're) mean/i, function(res) {
+    	res.send('Only to @EtanKarni');
     });
 
     robot.hear(/\(tableflip\)/i, function(res) {

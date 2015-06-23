@@ -68,28 +68,29 @@ module.exports = function(robot) {
 		    		path: '/user',
 		    		method: 'POST',
 		    		headers: {
-		    			"Authorization": "Basic " + getEncodedToken(env),
-		    			"User-Agent": "My Cubot app"
+		    			'Authorization': "Basic " + getEncodedToken(env),
+		    			'User-Agent': "My Cubot app",
+		    			'Content-Type': "application/json",
+		    			'Content-Length': data.length
 		    		}
 		    	};
 
-		    	if (env === 'eval') {
-		    		options.path = '/api/user';
-		    	}
+		    	if(env === 'eval' || env === 'evaluation') {
+		    		options.path = '/api' + options.path;
+		    	};
 
 		    	var req = https.request(options, function(httpResponse) {
 					httpResponse.on('data', function(d) {
 						res.reply(d.toString('utf8'));
 					});
 		    	});
-		    	console.log(req);
+
+		    	req.on('error', function(e) {
+				  res.reply(e);
+				});
 
 		    	req.write(data);
 		    	req.end();
-
-				req.on('error', function(e) {
-				  res.reply(e);
-				});
     		}
 	    }
     });
