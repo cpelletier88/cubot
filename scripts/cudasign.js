@@ -6,8 +6,11 @@
 
 var querystring = require('querystring');
 var https = require('https');
+var _ = require('lodash');
 
 module.exports = function(robot) {
+
+	var acceptedServerNames = ['eval', 'evaluation', 'dev', 'development', 'rc', 'prod', 'production'];
 
 	function getEncodedToken(env) {
 		if(env === 'eval' || env === 'evaluation') {
@@ -57,9 +60,11 @@ module.exports = function(robot) {
     	var env = res.match[2].trim();
 
     	if (email == undefined || password == undefined) {
-    		res.reply('You did provide and email and or password');
+    		res.reply('You did not provide an email and or password');
     	} else if(env == undefined) {
-    		res.reply('You did provide an environment');
+    		res.reply('You did not provide an environment/server');
+    	} else if(!_.includes(acceptedServerNames, env)) {
+    		res.reply('You did not provide a valid server name');
     	} else {
     		if (env == 'prod' || env == 'production') {
     			res.reply('Not creating users on prod right now');
