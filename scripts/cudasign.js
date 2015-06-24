@@ -2,7 +2,9 @@
 //   Make calls to cudasign api through cubot
 //
 // Commands:
-//   hubot create user <email>,<password> on <server> - returns json data of CudaSign response
+//   hubot create user <email>,<password> on <server> - Returns json data of CudaSign response
+//   hubot create token for <email>,<password>,<scope> on <server> - Returns json data of CudaSign response
+
 
 var querystring = require('querystring');
 var https = require('https');
@@ -59,9 +61,9 @@ module.exports = function(robot) {
     	var password = user[1].trim();
     	var env = res.match[2].trim();
 
-    	if (email == undefined || password == undefined) {
+    	if (email === undefined || password === undefined) {
     		res.reply('You did not provide an email and or password');
-    	} else if(env == undefined) {
+    	} else if(env === undefined) {
     		res.reply('You did not provide an environment/server');
     	} else if(!_.includes(acceptedServerNames, env)) {
     		res.reply('You did not provide a valid server name');
@@ -88,7 +90,7 @@ module.exports = function(robot) {
 
 		    	if(env === 'eval' || env === 'evaluation') {
 		    		options.path = '/api' + options.path;
-		    	};
+		    	}
 
 		    	var req = https.request(options, function(httpResponse) {
 					httpResponse.on('data', function(d) {
@@ -96,13 +98,64 @@ module.exports = function(robot) {
 					});
 		    	});
 
+		    	req.write(data);
+		    	req.end();
+
 		    	req.on('error', function(e) {
 				  res.reply(e);
 				});
-
-		    	req.write(data);
-		    	req.end();
     		}
 	    }
     });
+
+	robot.respond(/create token for (.*) on (.*)/i, function(res) {
+		var user = res.match[1].trim().split(',');
+    	var email = user[0].trim();
+    	var password = user[1].trim();
+    	var scope = user[2].trim();
+    	var env = res.match[2].trim();
+
+    	if (email === undefined || password === undefined) {
+    		res.reply('You did not provide an email, password, and or scope');
+    	} else if(env === undefined) {
+    		res.reply('You did not provide an environment/server');
+    	} else if(!_.includes(acceptedServerNames, env)) {
+    		res.reply('You did not provide a valid server name');
+    	} else {
+    		var data = querystring.stringify({
+		    	username: email,
+		    	password: password,
+		    	'grant_type': 'password',
+		    	scope: scope
+		    });
+
+		    var options = {
+	    		hostname: getHostName(env),
+	    		path: '/oauth2/token',
+	    		method: 'POST',
+	    		headers: {
+	    			'Authorization': "Basic " + getEncodedToken(env),
+	    			'User-Agent': "My Cubot app",
+	    			'Content-Type': "application/x-www-form-urlencoded"
+	    		}
+	    	};
+
+	    	if(env === 'eval' || env === 'evaluation') {
+	    		options.path = '/api' + options.path;
+	    	}
+
+	    	var req = https.request(options, function(httpResponse) {
+				httpResponse.on('data', function(d) {
+					res.reply(d.toString('utf8'));
+				});
+	    	});
+
+	    	req.write(data);
+	    	req.end();
+
+	    	req.on('error', function(e) {
+			  res.reply(e);
+			});
+    	}
+	});
 };
