@@ -18,7 +18,8 @@ module.exports = function(robot) {
 		if(env === 'eval' || env === 'evaluation') {
 			return 'MGZjY2RiYzczNTgxY2EwZjliZjhjMzc5ZTZhOTY4MTM6MzcxOWExMjRiY2ZjMDNjNTM0ZDRmNWMwNWI1YTE5NmI=';
 		} else if(env === 'rc') {
-			return (new Buffer(process.env.CS_RC_CLIENT_ID + ':' + process.env.CS_RC_CLIENT_SECRET).toString('base64'));
+			return 'ODM2YTk0OTQ3YzExOWEwNTlmODllMmFjYWQ2MTlmYzA6OGVkMWMzZjRjODMyNzlmZWE3YmY0MGJiNDExMjdiZjI=';
+			//return (new Buffer(process.env.CS_RC_CLIENT_ID + ':' + process.env.CS_RC_CLIENT_SECRET).toString('base64'));
 		} else {
 			return (new Buffer(process.env.CS_CLIENT_ID + ':' + process.env.CS_CLIENT_SECRET).toString('base64'));
 		}
@@ -136,7 +137,8 @@ module.exports = function(robot) {
 	    		headers: {
 	    			'Authorization': "Basic " + getEncodedToken(env),
 	    			'User-Agent': "My Cubot app",
-	    			'Content-Type': "application/x-www-form-urlencoded"
+	    			'Content-Type': "application/x-www-form-urlencoded",
+		    		'Content-Length': data.length
 	    		}
 	    	};
 
