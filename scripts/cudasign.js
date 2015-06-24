@@ -1,3 +1,9 @@
+// Description:
+//   Make calls to cudasign api through cubot
+//
+// Commands:
+//   hubot create user <email>,<password> on <server> - returns json data of CudaSign response
+
 var querystring = require('querystring');
 var https = require('https');
 
