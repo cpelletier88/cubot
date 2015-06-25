@@ -114,7 +114,7 @@ module.exports = function(robot) {
         
   });
 
-    robot.hear(/\(fire\)/i, function(res){
+    robot.hear(/\(fire\)/i, function(msg){
       if (msg.message.room === 'super_smash_brothers' || msg.message.room === 'robots') {
           msg.send('(dealwithit)');
       }    
