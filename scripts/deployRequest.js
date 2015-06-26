@@ -21,7 +21,7 @@ module.exports = function(robot) {
 		}
 
 		deploymentRequest = 'Deployment request for <strong>' + environment + '</strong><br />' + 
-							'<table style="border: 1px solid black;"><thead><tr><th>Repo</th><th>&nbsp;</th><th>Branch</th></tr></thead>' +
+							'<table><tr><tr><td><strong>Repo</strong></td><td>&nbsp;</td><td><strong>Branch</strong></td></tr></tr>' +
   							'<tbody>';
 
 		addRow('SNapp', snapp);
