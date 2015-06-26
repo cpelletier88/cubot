@@ -1,5 +1,5 @@
 module.exports = function(robot) {
-	return robot.router.post('/hubot/requestdeploy', function(req, res) {
+	robot.router.post('/hubot/requestdeploy', function(req, res) {
 		var data, room, environment, snapp, snappier, tacostand, sql;
 
 		data = req.body.payload != null ? JSON.parse(req.body.payload) : req.body;
@@ -42,13 +42,17 @@ module.exports = function(robot) {
     		message_format: 'html'
     	});
 
-		robot.http('https://api.hipchat.com/v2/room/1610182/notification?auth_token=' + process.env.HIPCHAT_API_KEY)
+		robot.http('https://api.hipchat.com/v2/room/1610182/notification?auth_token=' + process.env.DEPLOY_HIPCHAT_API_KEY)
 			.header('Content-Type', 'application/json')
 			.post(data)(function(err, res, body) {
 			});
 
 		return res.send('OK');
 
+	});
+	
+	robot.hear(/\deployment request url/i, function(msg){
+		msg.send('You can make requests here: http://cudasign-cubot.herokuapp.com/hubot/deploy');
 	});
 }
 
