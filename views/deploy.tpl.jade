@@ -10,10 +10,10 @@ html
 					
 					if message && message.success
 						div.alert-box.success(data-alert="")
-							| #{success}
+							| #{message.success}
 					else if message && message.error
 						div.alert-box.alert(data-alert="")
-							| #{error}
+							| #{message.error}
 
 					form(action="/hubot/requestdeploy", method="post")
 
