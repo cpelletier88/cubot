@@ -1,7 +1,37 @@
 html
 	head
 		title Deploy Request
+		link(href="https://cdnjs.cloudflare.com/ajax/libs/foundation/5.5.2/css/foundation.min.css", rel="stylesheet")
 	body
-		form(action="/hubot/requestdeploy", method="post")
-			input(type="text", name="snappier", placeholder="snappier branch")
-		button(type="submit", value="submit") Request!
+		div.container
+			div.row
+				div.column.medium-6.small-centered
+					h2 Deployment Request
+					form(action="/hubot/requestdeploy", method="post")
+						label(for="environment")
+							select#SNapp(name="environment")
+								option(value="dev") DEV
+								option(value="rc") RC
+								option(value="stage") STAGE
+								option(value="prod") PROD
+								option(value="eval") EVAL
+								option(value="QA") QA
+						hr
+						label(for="SNapp")
+							input#SNapp(type="text", name="snapp", placeholder="SNapp branch")
+						label(for="SNStaticPages")
+							input#SNStaticPages(type="text", name="snstaticpages", placeholder="SNStaticPages branch")
+						label(for="TacoStand")
+							input#TacoStand(type="text", name="tacostand", placeholder="TacoStand branch")
+						label(for="SQL")
+							textarea#SQL(type="text", name="sql", placeholder="sql changes")
+						hr
+						label(for="SNSeats")
+							textarea#SNSeats(type="text", name="sql", placeholder="sql changes")
+						hr
+						label(for="Snappier")
+							input#Snappier(type="text", name="snappier", placeholder="Snappier branch")
+						label(for="SNWebAPI")
+							input#SNWebAPI(type="text", name="snwebapi", placeholder="WebAPI branch")
+						br
+						button(type="submit", value="submit") Request!
