@@ -11,11 +11,13 @@ module.exports = function(robot) {
 
 		robot.messageRoom('robots', 'testing');
 
-
+		deploymentRequest = 'Deployment request for <strong>' + environment + '</strong><br />' + 
+							'<thead><tr><th>Repo</th><th>Branch</th></tr></thead>' +
+  							'<tbody><tr><td>Snapp</td><td>Master</td></tr></tbody>';
 
 		var data = JSON.stringify({
     		color: 'green',
-    		message: '<strong>Test</strong>',
+    		message: deploymentRequest,
     		notify: 'true',
     		message_format: 'html'
     	});
