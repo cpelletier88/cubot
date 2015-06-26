@@ -1,6 +1,6 @@
 module.exports = function(robot) {
 	robot.router.post('/hubot/requestdeploy', function(req, res) {
-		var data, room, environment, snapp, snappier, tacostand, sql;
+		var data, environment, snapp, snappier, tacostand, sql, snseats, snwebapi, tag, snseatsapi, snstaticpages, requester;
 
 		data = req.body.payload != null ? JSON.parse(req.body.payload) : req.body;
 		environment = data.environment;
@@ -15,12 +15,28 @@ module.exports = function(robot) {
 		tag = data.tag;
 		snseatsapi = data.snseatsapi
 
+		var jade = require('jade');
+		var fn = jade.compileFile('./views/deploy.tpl.jade');
+
+
 		if(!requester) {
-			return res.send('Requester name required!');
+			var html = fn({
+				message: {
+					error: 'Requester name required!'
+				}				
+			});
+
+			return res.send(html);
 		}
 
 		if(!snapp && !snstaticpages && !tacostand && !snseats && !snappier && !snwebapi && !snseatsapi) {
-			return res.send('You need to request SOMETHING!');
+			var html = fn({
+				message: {
+					error: 'You need to make a request!'
+				}				
+			});
+
+			return res.send(html);
 		}
 
 		function addRow(name, value) {
@@ -57,7 +73,13 @@ module.exports = function(robot) {
 			.post(data)(function(err, res, body) {
 			});
 
-		return res.send('OK');
+			var html = fn({
+				message: {
+					success: 'Request successful!'
+				}				
+			});
+
+			return res.send(html);
 
 	});
 	
