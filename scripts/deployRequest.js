@@ -13,12 +13,13 @@ module.exports = function(robot) {
 		snappier = data.snappier;
 		requester = data.requester;
 		tag = data.tag;
+		snseatsapi = data.snseatsapi
 
 		if(!requester) {
 			return res.send('Requester name required!');
 		}
 
-		if(!snapp && !snstaticpages && !tacostand && !snseats && !snappier && !snwebapi) {
+		if(!snapp && !snstaticpages && !tacostand && !snseats && !snappier && !snwebapi && !snseatsapi) {
 			return res.send('You need to request SOMETHING!');
 		}
 
