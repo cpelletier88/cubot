@@ -8,20 +8,22 @@ html
 				div.column.medium-6.small-centered
 					h2 Deployment Request
 
-					label(for="RequestBy") Requester:
-						input#RequestBy(type="text", name="requester", placeholder="Requested by (e.g. your name)")
-					hr
-					label(for="environment") ENVIRONMENT
-						select#SNapp(name="environment")
-							option(value="dev") DEV
-							option(value="rc") RC
-							option(value="stage") STAGE
-							option(value="prod") PROD
-							option(value="eval") EVAL
-							option(value="QA") QA
-					hr
-					
 					form(action="/hubot/requestdeploy", method="post")
+					
+						label(for="RequestBy") Requester:
+							input#RequestBy(type="text", name="requester", placeholder="Requested by (e.g. your name)")
+						hr
+						label(for="environment") ENVIRONMENT
+							select#SNapp(name="environment")
+								option(value="dev") DEV
+								option(value="rc") RC
+								option(value="stage") STAGE
+								option(value="prod") PROD
+								option(value="eval") EVAL
+								option(value="QA") QA
+						hr
+					
+					
 						ul.tabs(data-tab="")
 							li.tab-title.active 
 								a(href="#panel1")
