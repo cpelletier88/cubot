@@ -113,7 +113,27 @@ module.exports = function(robot) {
         });
 
         
-  });
+    });
+
+      robot.hear(/htmlnotify robots (.*)/i, function(res){
+
+        var arguments = res.match[1].split('|');
+
+        var data = JSON.stringify({
+            color: arguments[0],
+            message: arguments[1],
+            notify: 'false',
+            message_format: 'html'
+          });
+
+        robot.http('https://api.hipchat.com/v2/room/1610182/notification?auth_token=' + process.env.HIPCHAT_API_KEY)
+          .header('Content-Type', 'application/json')
+          .post(data)(function(err, res, body) {
+
+          });
+
+          
+    });
 
     robot.hear(/\(fire\)/i, function(msg){
       if (msg.message.room === 'super_smash_brothers' || msg.message.room === 'robots') {
