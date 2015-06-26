@@ -36,7 +36,8 @@ module.exports = function(robot) {
     		if(hours > 17 || (hours >= 16 && minutes > 30)) {
     			msg.send('I would love to play!');
     		} else {
-    			msg.send('Shouldn\'t you be working? (areyoukiddingme)')
+    			msg.send('Shouldn\'t you be working? (areyoukiddingme)');
+          msg.send(hours +':'+ minutes)
     		}
     	}
 
