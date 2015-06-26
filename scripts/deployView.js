@@ -1,8 +1,8 @@
 module.exports = function(robot) {
 	return robot.router.get('/hubot/deploy', function(req, res) {
-		var template = require('node-template');
-
-		var html = template.create('./views/deploy.tpl.html');
+		var jade = require('jade');
+		var fn = jade.compile('./views/deploy.tpl.jade');
+		var html = fn();
 
 		return res.send(html);
 
