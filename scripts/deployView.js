@@ -1,5 +1,7 @@
 module.exports = function(robot) {
-	return robot.router.post('/hubot/deploy', function(req, res) {
-		return '<html><body>wat</body></html>';
+	return robot.router.get('/hubot/deploy', function(req, res) {
+		html =  '<html><body>wat</body></html>';
+		res.type('html');
+		res.send(html);
 	}
 }
