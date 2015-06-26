@@ -5,15 +5,20 @@ module.exports = function(robot) {
 		data = req.body.payload != null ? JSON.parse(req.body.payload) : req.body;
 		environment = data.environment;
 		snapp = data.snapp;
-		snappier = data.snappier;
+		snstaticpages = data.snstaticpages;
 		tacostand = data.tacostand;
 		sql = data.sql;
 
 		robot.messageRoom('robots', 'testing');
 
 		deploymentRequest = 'Deployment request for <strong>' + environment + '</strong><br />' + 
-							'<table><thead><tr><th>Repo</th><th>Branch</th></tr></thead>' +
-  							'<tbody><tr><td>Snapp</td><td>Master</td></tr></tbody>' +
+							'<table border="1"><thead><tr><th>Repo</th><th>Branch</th></tr></thead>' +
+  							'<tbody>' + 
+  							'<tr><td>SNapp</td><td>' + snapp + '</td></tr>' + 
+  							'<tr><td>SNStaticPages</td><td>' + snstaticpages + '</td></tr>' + 
+  							'<tr><td>TacoStand</td><td>' + tacostand + '</td></tr>' + 
+  							'<tr><td>SQL</td><td>' + sql + '</td></tr>' + 
+  							'</tbody>' +
   							'</table>';
 
 		var data = JSON.stringify({
