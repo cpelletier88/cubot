@@ -8,7 +8,10 @@ html
 				div.column.medium-6.small-centered
 					h2 Deployment Request
 					form(action="/hubot/requestdeploy", method="post")
-						label(for="environment")
+						label(for="RequestBy") Requester:
+							input#RequestBy(type="text", name="requester", placeholder="Requested by (e.g. your name)")
+						hr
+						label(for="environment") ENVIRONMENT
 							select#SNapp(name="environment")
 								option(value="dev") DEV
 								option(value="rc") RC
@@ -33,5 +36,8 @@ html
 							input#Snappier(type="text", name="snappier", placeholder="Snappier branch")
 						label(for="SNWebAPI") SNWebAPI:
 							input#SNWebAPI(type="text", name="snwebapi", placeholder="WebAPI branch")
+						hr
+						label(for="Tag") Tag:
+							input#Tag(type="text", name="tag", placeholder="Tag Name (SNSeats and SNappier only)")
 						br
 						button(type="submit", value="submit") Request!

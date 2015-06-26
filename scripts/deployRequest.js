@@ -11,8 +11,16 @@ module.exports = function(robot) {
 		snseats = data.snseats;
 		snwebapi = data.snwebapi;
 		snappier = data.snappier;
+		requester = data.requester;
+		tag = data.tag;
 
-		robot.messageRoom('robots', 'testing');
+		if(!requester) {
+			return res.send('Requester name required!');
+		}
+
+		if(!snapp && !snstaticpages && !tacostand && !snseats && !snappier && !snwebapi) {
+			return res.send('You need to request SOMETHING!');
+		}
 
 		function addRow(name, value) {
 			if(value) {
@@ -20,7 +28,7 @@ module.exports = function(robot) {
 			}
 		}
 
-		deploymentRequest = 'Deployment request for <strong>' + environment + '</strong><br />' + 
+		deploymentRequest = 'Deployment request for <strong>' + environment + '</strong> by <strong>' + requester + '</strong><br />' + 
 							'<table><tr><tr><td><strong>Repo</strong></td><td>&nbsp;</td><td><strong>Branch</strong></td></tr></tr>' +
   							'<tbody>';
 
@@ -31,6 +39,7 @@ module.exports = function(robot) {
 		addRow('SNSeats', snseats);
 		addRow('SNappier', snappier);
 		addRow('SNWebAPI', snwebapi);
+		addRow('Tag', tag);
 
 		deploymentRequest += '</tbody>' +
 							 '</table>';
