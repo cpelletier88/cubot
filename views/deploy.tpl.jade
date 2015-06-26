@@ -7,11 +7,11 @@ html
 			div.row
 				div.column.medium-6.small-centered
 					h2 Deployment Request
-
-					if message.success
+					
+					if message && message.success
 						div.alert-box.success(data-alert="")
 							#{success}
-					else if message.error
+					else if message && message.error
 						div.alert-box.alert(data-alert="")
 							#{error}
 
