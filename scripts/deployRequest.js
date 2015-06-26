@@ -9,19 +9,19 @@ module.exports = function(robot) {
 		tacostand = data.tacostand;
 		sql = data.sql;
 		snseats = data.snseats;
-		webapi = data.webapi;
+		snwebapi = data.snwebapi;
 		snappier = data.snappier;
 
 		robot.messageRoom('robots', 'testing');
 
 		function addRow(name, value) {
 			if(value) {
-				deploymentRequest +='<tr><td>' + name + '</td><td>&nbsp;&nbsp;</td><td>' + value + '</td></tr>';
+				deploymentRequest +='<tr><td>' + name + '</td><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td>' + value + '</td></tr>';
 			}
 		}
 
 		deploymentRequest = 'Deployment request for <strong>' + environment + '</strong><br />' + 
-							'<table border="1" cell-padding="3" cell-spacing="5"><thead><tr><th text-align="left">Repo</th><th text-align="left">&nbsp;</th><th text-align="left">Branch</th></tr></thead>' +
+							'<table border="1" cell-padding="3" cell-spacing="5"><thead><tr><th>Repo</th><th>&nbsp;</th><th>Branch</th></tr></thead>' +
   							'<tbody>';
 
 		addRow('SNapp', snapp);
@@ -30,7 +30,7 @@ module.exports = function(robot) {
 		addRow('SQL', sql);
 		addRow('SNSeats', snseats);
 		addRow('SNappier', snappier);
-		addRow('WebAPI', webapi);
+		addRow('SNWebAPI', snwebapi);
 
 		deploymentRequest += '</tbody>' +
 							 '</table>';
