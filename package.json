@@ -21,6 +21,7 @@
     "hubot-shipit": "^0.2.0",
     "lodash": "^3.9.3",
     "moment": "^2.10.3",
+    "node-template": "graphnode/node-template",
     "util": "^0.10.3"
   },
   "engines": {
