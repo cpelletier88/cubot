@@ -12,7 +12,7 @@ module.exports = function(robot) {
 		robot.messageRoom('robots', 'testing');
 
 		deploymentRequest = 'Deployment request for <strong>' + environment + '</strong><br />' + 
-							'<table border="1"><thead><tr><th>Repo</th><th>Branch</th></tr></thead>' +
+							'<table border="1" cell-padding="3" cell-spacing="5"><thead><tr><th>Repo</th><th>Branch</th></tr></thead>' +
   							'<tbody>' + 
   							'<tr><td>SNapp</td><td>' + snapp + '</td></tr>' + 
   							'<tr><td>SNStaticPages</td><td>' + snstaticpages + '</td></tr>' + 
@@ -31,7 +31,11 @@ module.exports = function(robot) {
 		robot.http('https://api.hipchat.com/v2/room/1610182/notification?auth_token=' + process.env.HIPCHAT_API_KEY)
 			.header('Content-Type', 'application/json')
 			.post(data)(function(err, res, body) {
-				return res.send('OK');
 			});
+
+		return res.send('OK');
+
 	});
 }
+
+// curl -X POST -H "Content-Type: application/json" -d '{"environment":"rc", "snapp":"master", "snstaticpages":"master", "tacostand":"master", "sql":"none"}' http://cudasign-cubot.herokuapp.com/hubot/requestdeploy
