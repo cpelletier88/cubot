@@ -8,18 +8,32 @@ module.exports = function(robot) {
 		snstaticpages = data.snstaticpages;
 		tacostand = data.tacostand;
 		sql = data.sql;
+		snseats = data.snseats;
+		webapi = data.webapi;
+		snappier = data.snappier;
 
 		robot.messageRoom('robots', 'testing');
 
+		function addRow(name, value) {
+			if(value) {
+				deploymentRequest +='<tr><td>' + name + '</td><td>&nbsp;&nbsp;</td><td>' + value + '</td></tr>';
+			}
+		}
+
 		deploymentRequest = 'Deployment request for <strong>' + environment + '</strong><br />' + 
-							'<table border="1" cell-padding="3" cell-spacing="5"><thead><tr><th>Repo</th><th>Branch</th></tr></thead>' +
-  							'<tbody>' + 
-  							'<tr><td>SNapp</td><td>' + snapp + '</td></tr>' + 
-  							'<tr><td>SNStaticPages</td><td>' + snstaticpages + '</td></tr>' + 
-  							'<tr><td>TacoStand</td><td>' + tacostand + '</td></tr>' + 
-  							'<tr><td>SQL</td><td>' + sql + '</td></tr>' + 
-  							'</tbody>' +
-  							'</table>';
+							'<table border="1" cell-padding="3" cell-spacing="5"><thead><tr><th text-align="left">Repo</th><th text-align="left">&nbsp;</th>th text-align="left">Branch</th></tr></thead>' +
+  							'<tbody>';
+
+		addRow('SNapp', snapp);
+		addRow('SNStaticPages', snstaticpages);
+		addRow('TacoStand', tacostand);
+		addRow('SQL', sql);
+		addRow('SNSeats', snseats);
+		addRow('SNappier', snappier);
+		addRow('WebAPI', webapi);
+
+		deploymentRequest += '</tbody>' +
+							 '</table>';
 
 		var data = JSON.stringify({
     		color: 'green',
