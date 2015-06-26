@@ -21,7 +21,7 @@ module.exports = function(robot) {
 		}
 
 		deploymentRequest = 'Deployment request for <strong>' + environment + '</strong><br />' + 
-							'<table border="1" cell-padding="3" cell-spacing="5"><thead><tr><th text-align="left">Repo</th><th text-align="left">&nbsp;</th>th text-align="left">Branch</th></tr></thead>' +
+							'<table border="1" cell-padding="3" cell-spacing="5"><thead><tr><th text-align="left">Repo</th><th text-align="left">&nbsp;</th><th text-align="left">Branch</th></tr></thead>' +
   							'<tbody>';
 
 		addRow('SNapp', snapp);
@@ -53,3 +53,4 @@ module.exports = function(robot) {
 }
 
 // curl -X POST -H "Content-Type: application/json" -d '{"environment":"rc", "snapp":"master", "snstaticpages":"master", "tacostand":"master", "sql":"none"}' http://cudasign-cubot.herokuapp.com/hubot/requestdeploy
+// curl -X POST -H "Content-Type: application/json" -d '{"environment":"qa", "snappier":"master", "snwebapi":"develop"}' http://cudasign-cubot.herokuapp.com/hubot/requestdeploy
