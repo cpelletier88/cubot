@@ -42,7 +42,7 @@ module.exports = function(robot) {
     		message_format: 'html'
     	});
 
-		robot.http('https://api.hipchat.com/v2/room/1610182/notification?auth_token=' + process.env.DEPLOY_HIPCHAT_API_KEY)
+		robot.http('https://api.hipchat.com/v2/room/1325950/notification?auth_token=' + process.env.DEPLOY_HIPCHAT_API_KEY)
 			.header('Content-Type', 'application/json')
 			.post(data)(function(err, res, body) {
 			});
