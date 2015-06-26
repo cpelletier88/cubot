@@ -120,4 +120,8 @@ module.exports = function(robot) {
       }    
     });
 
+    robot.hear(/noooooo/i, function(msg) {
+      msg.send('http://www.nooooooooooooooo.com/');
+    });
+
 }
