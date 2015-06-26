@@ -14,7 +14,7 @@ module.exports = function(robot) {
     		notify: 'true',
     		message_format: 'text'
     	});
-		    	
+
 		robot.http('https://api.hipchat.com/v2/room/1610182/notification?auth_token=' + process.env.HIPCHAT_API_KEY)
 			.header('Content-Type', 'application/json')
 			.post(data)(function(err, res, body) {
@@ -22,5 +22,3 @@ module.exports = function(robot) {
 			});
 	});
 }
-
-curl -X POST -H "Content-Type: application/json" -d '{"secret":"C-TECH Astronomy"}' http://cudasign-cubot.herokuapp.com/hubot/requestdeploy
