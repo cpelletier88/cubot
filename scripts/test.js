@@ -115,7 +115,7 @@ module.exports = function(robot) {
         
     });
 
-      robot.hear(/htmlnotify robots (.*)/i, function(res){
+      robot.hear(/notifyhtml robots (.*)/i, function(res){
 
         var arguments = res.match[1].split('|');
 
