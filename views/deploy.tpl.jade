@@ -22,7 +22,7 @@ html
 					hr
 					
 					form(action="/hubot/requestdeploy", method="post")
-						ul.tabs(data-tab)
+						ul.tabs(data-tab="")
 							li.tab-title.active 
 								a(href="#panel1")
 									| SNapp
@@ -62,3 +62,5 @@ html
 		script(src="https://code.jquery.com/jquery-2.1.4.min.js")
 		script(src="https://cdnjs.cloudflare.com/ajax/libs/foundation/5.5.2/js/foundation.min.js")
 		script(src="https://cdnjs.cloudflare.com/ajax/libs/foundation/5.5.2/js/foundation/foundation.tab.js")
+		script.
+			$(document).on('ready', function() { $(document).foundation(); });
