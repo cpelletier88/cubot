@@ -19,6 +19,7 @@
     "hubot-rules": "^0.1.1",
     "hubot-scripts": "^2.16.1",
     "hubot-shipit": "^0.2.0",
+    "jade": "^1.11.0",
     "lodash": "^3.9.3",
     "moment": "^2.10.3",
     "util": "^0.10.3"

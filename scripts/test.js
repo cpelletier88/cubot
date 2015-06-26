@@ -110,13 +110,14 @@ module.exports = function(robot) {
         .post(data)(function(err, res, body) {
 
         });
+
         
   });
 
-  robot.hear(/\(fire\)/i, function(res){
-    if (msg.message.room === 'super_smash_brothers' || msg.message.room === 'robots') {
-        msg.send('(dealwithit)');
-    }    
-  });
+    robot.hear(/\(fire\)/i, function(msg){
+      if (msg.message.room === 'super_smash_brothers' || msg.message.room === 'robots') {
+          msg.send('(dealwithit)');
+      }    
+    });
 
 }

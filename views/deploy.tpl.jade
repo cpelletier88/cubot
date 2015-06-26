@@ -1,0 +1,68 @@
+html
+	head
+		title Deploy Request
+		link(href="https://cdnjs.cloudflare.com/ajax/libs/foundation/5.5.2/css/foundation.min.css", rel="stylesheet")
+	body
+		div.container
+			div.row
+				div.column.medium-6.small-centered
+					h2 Deployment Request
+
+					form(action="/hubot/requestdeploy", method="post")
+					
+						label(for="RequestBy") Requester:
+							input#RequestBy(type="text", name="requester", placeholder="Requested by (e.g. your name)")
+						hr
+						label(for="environment") ENVIRONMENT
+							select#SNapp(name="environment")
+								option(value="dev") DEV
+								option(value="rc") RC
+								option(value="stage") STAGE
+								option(value="prod") PROD
+								option(value="eval") EVAL
+								option(value="QA") QA
+						hr
+					
+					
+						ul.tabs(data-tab="")
+							li.tab-title.active 
+								a(href="#panel1")
+									| SNapp
+							li.tab-title
+								a(href="#panel2")
+									| SNSeats
+							li.tab-title
+								a(href="#panel3")
+									| SNappier
+						div.tabs-content
+							div.content.active#panel1
+								label(for="SNapp") SNapp:
+									input#SNapp(type="text", name="snapp", placeholder="SNapp branch")
+								label(for="SNStaticPages") SNStaticPages:
+									input#SNStaticPages(type="text", name="snstaticpages", placeholder="SNStaticPages branch")
+								label(for="TacoStand") TacoStand:
+									input#TacoStand(type="text", name="tacostand", placeholder="TacoStand branch")
+							div.content#panel2
+								label(for="SNSeats") SNSeats APP:
+									input#SNSeats(type="text", name="snseats", placeholder="SNSeats branch")
+								label(for="SNSeatsAPI") SNSeats API:
+									input#SNSeatsAPI(type="text", name="snseatsapi", placeholder="SNSeatsAPI branch")
+							div.content#panel3
+								label(for="Snappier") SNappier:
+									input#Snappier(type="text", name="snappier", placeholder="Snappier branch")
+								label(for="SNWebAPI") SNWebAPI:
+									input#SNWebAPI(type="text", name="snwebapi", placeholder="WebAPI branch")
+
+						label(for="SQL") SQL changes:
+							textarea#SQL(type="text", name="sql", placeholder="sql changes")
+											
+						label(for="Tag") Tag:
+							input#Tag(type="text", name="tag", placeholder="Tag Name (SNSeats and SNappier only)")
+						br
+						button(type="submit", value="submit") Request!
+
+		script(src="https://code.jquery.com/jquery-2.1.4.min.js")
+		script(src="https://cdnjs.cloudflare.com/ajax/libs/foundation/5.5.2/js/foundation.min.js")
+		script(src="https://cdnjs.cloudflare.com/ajax/libs/foundation/5.5.2/js/foundation/foundation.tab.js")
+		script.
+			$(document).on('ready', function() { $(document).foundation(); });
