@@ -8,8 +8,15 @@ html
 				div.column.medium-6.small-centered
 					h2 Deployment Request
 
+					if message.success
+						div.alert-box.success(data-alert="")
+							#{success}
+					else if message.error
+						div.alert-box.alert(data-alert="")
+							#{error}
+
 					form(action="/hubot/requestdeploy", method="post")
-					
+
 						label(for="RequestBy") Requester:
 							input#RequestBy(type="text", name="requester", placeholder="Requested by (e.g. your name)")
 						hr
