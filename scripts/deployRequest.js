@@ -51,7 +51,7 @@ module.exports = function(robot) {
 
 	});
 	
-	robot.hear(/\deployment request url/i, function(msg){
+	robot.hear(/deployment request url/i, function(msg){
 		msg.send('You can make requests here: http://cudasign-cubot.herokuapp.com/hubot/deploy');
 	});
 }
