@@ -74,9 +74,9 @@ module.exports = function(robot) {
         if(!passedDay) {
         	msg.send('Today lunch is ' + lunchChoices[daysFromStartPoint]);
         } else if (passedDay.toLowerCase() === 'tomorrow') {
-        	msg.send(passedDay + ' lunch will be ' + lunchChoices[daysFromStartPoint]);
+        	msg.send(passedDay + ' lunch will be ' + lunchChoices[daysFromStartPoint] + ' ... probably (pokerface)');
         } else {
-        	msg.send('Lunch will be ' + lunchChoices[daysFromStartPoint] + ' on ' + passedDay);
+        	msg.send('Lunch will be ' + lunchChoices[daysFromStartPoint] + ' on ' + passedDay  + ' ... probably (pokerface)');
         }
 
     });
