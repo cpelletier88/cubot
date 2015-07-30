@@ -25,7 +25,7 @@ module.exports = function (robot) {
     }, 1500);
   });
 
-  robot.hear(/(smash)|(ⓢⓜⓐⓢⓗ)/i, function (msg) {
+  robot.hear(/(smash)|(ⓢⓜⓐⓢⓗ)|sm\(ashto/i, function (msg) {
     if (msg.message.room === 'super_smash_brothers') {
       var moment = require('moment');
       var now = moment().subtract(7, 'hours')
