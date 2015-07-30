@@ -7,7 +7,7 @@
 
 
 var querystring = require('querystring');
-var https = require('https');
+var unirest = require('unirest');
 var _ = require('lodash');
 
 module.exports = function(robot) {
@@ -18,8 +18,7 @@ module.exports = function(robot) {
 		if(env === 'eval' || env === 'evaluation') {
 			return 'MGZjY2RiYzczNTgxY2EwZjliZjhjMzc5ZTZhOTY4MTM6MzcxOWExMjRiY2ZjMDNjNTM0ZDRmNWMwNWI1YTE5NmI=';
 		} else if(env === 'rc') {
-			return 'ODM2YTk0OTQ3YzExOWEwNTlmODllMmFjYWQ2MTlmYzA6OGVkMWMzZjRjODMyNzlmZWE3YmY0MGJiNDExMjdiZjI=';
-			//return (new Buffer(process.env.CS_RC_CLIENT_ID + ':' + process.env.CS_RC_CLIENT_SECRET).toString('base64'));
+			return (new Buffer(process.env.CS_RC_CLIENT_ID + ':' + process.env.CS_RC_CLIENT_SECRET).toString('base64'));
 		} else {
 			return (new Buffer(process.env.CS_CLIENT_ID + ':' + process.env.CS_CLIENT_SECRET).toString('base64'));
 		}
@@ -77,34 +76,22 @@ module.exports = function(robot) {
 		    		password: password
 		    	});
 
-		    	var options = {
-		    		hostname: getHostName(env),
-		    		path: '/user',
-		    		method: 'POST',
-		    		headers: {
-		    			'Authorization': "Basic " + getEncodedToken(env),
-		    			'User-Agent': "My Cubot app",
-		    			'Content-Type': "application/json",
-		    			'Content-Length': data.length
-		    		}
-		    	};
-
-		    	if(env === 'eval' || env === 'evaluation') {
-		    		options.path = '/api' + options.path;
+				var endpoint;
+				if(env === 'eval' || env === 'evaluation') {
+		    		endpoint = '/api/user';
+		    	} else {
+		    		endpoint = '/user';
 		    	}
 
-		    	var req = https.request(options, function(httpResponse) {
-					httpResponse.on('data', function(d) {
-						res.reply(d.toString('utf8'));
+				unirest.post('https://' + getHostName(env) + endpoint)
+					.header('Authorization', 'Basic ' + getEncodedToken(env))
+					.header('User-Agent', 'My Cubot ap')
+					.header('Content-Type', 'application/json')
+					.header('Content-Length', data.length)
+					.send(data)
+					.end(function(response) {
+						res.reply(response.raw_body);
 					});
-		    	});
-
-		    	req.write(data);
-		    	req.end();
-
-		    	req.on('error', function(e) {
-				  res.reply(e);
-				});
     		}
 	    }
     });
@@ -113,7 +100,7 @@ module.exports = function(robot) {
 		var user = res.match[1].trim().split(',');
     	var email = user[0].trim();
     	var password = user[1].trim();
-    	var scope = user[2].trim();
+    	var scope = user[2] ? user[2].trim() : '*';
     	var env = res.match[2].trim();
 
     	if (email === undefined || password === undefined) {
@@ -130,34 +117,22 @@ module.exports = function(robot) {
 		    	scope: scope
 		    });
 
-		    var options = {
-	    		hostname: getHostName(env),
-	    		path: '/oauth2/token',
-	    		method: 'POST',
-	    		headers: {
-	    			'Authorization': "Basic " + getEncodedToken(env),
-	    			'User-Agent': "My Cubot app",
-	    			'Content-Type': "application/x-www-form-urlencoded",
-		    		'Content-Length': data.length
-	    		}
-	    	};
-
-	    	if(env === 'eval' || env === 'evaluation') {
-	    		options.path = '/api' + options.path;
+			var endpoint;
+			if(env === 'eval' || env === 'evaluation') {
+	    		endpoint = '/api/oauth2/token';
+	    	} else {
+	    		endpoint = '/oauth2/token';
 	    	}
 
-	    	var req = https.request(options, function(httpResponse) {
-				httpResponse.on('data', function(d) {
-					res.reply(d.toString('utf8'));
-				});
-	    	});
-
-	    	req.write(data);
-	    	req.end();
-
-	    	req.on('error', function(e) {
-			  res.reply(e);
-			});
+			unirest.post('https://' + getHostName(env) + endpoint)
+					.header('Authorization', 'Basic ' + getEncodedToken(env))
+					.header('User-Agent', 'My Cubot ap')
+					.header('Content-Type', 'application/x-www-form-urlencoded')
+					.header('Content-Length', data.length)
+					.send(data)
+					.end(function(response) {
+						res.reply(response.raw_body);
+					});
     	}
 	});
 };
