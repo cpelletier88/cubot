@@ -71,14 +71,24 @@ module.exports = function(robot) {
 		var daysFromStartPoint = Math.abs(moment('June 8, 2015').diff(now, 'days'));
 		daysFromStartPoint = daysFromStartPoint % lunchChoices.length;
 
-        if(!passedDay) {
-        	msg.send('Today lunch is ' + lunchChoices[daysFromStartPoint]);
-        } else if (passedDay.toLowerCase() === 'tomorrow') {
-        	msg.send(passedDay + ' lunch will be ' + lunchChoices[daysFromStartPoint] + ' ... probably (pokerface)');
-        } else {
-        	msg.send('Lunch will be ' + lunchChoices[daysFromStartPoint] + ' on ' + passedDay  + ' ... probably (pokerface)');
-        }
+        // if(!passedDay) {
+        // 	msg.send('Today lunch is ' + lunchChoices[daysFromStartPoint]);
+        // } else if (passedDay.toLowerCase() === 'tomorrow') {
+        // 	msg.send(passedDay + ' lunch will be ' + lunchChoices[daysFromStartPoint] + ' ... probably (pokerface)');
+        // } else {
+        // 	msg.send('Lunch will be ' + lunchChoices[daysFromStartPoint] + ' on ' + passedDay  + ' ... probably (pokerface)');
+        // }
 
+    	var lunchIDK = [
+    		'I don\'t know!',
+    		'It could be burgers, maybe, but maybe something else too. (shrug)',
+    		'I\'m not sure but I hope it is donuts! (donut)',
+    		'It could possibly be sandwiches or Chinese food... or pizza.',
+    		'Ask me again in 30 minutes. (pokerface)',
+    		'I have no idea but I hope it gets here soon.'
+    	];
+
+    	msg.send(msg.random(lunchIDK));
     });
 
 	robot.hear(/lunch is here/i, function(res){
