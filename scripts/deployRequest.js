@@ -13,7 +13,7 @@ module.exports = function(robot) {
 		snappier = data.snappier;
 		requester = data.requester;
 		tag = data.tag;
-		snseatsapi = data.snseatsapi
+		snseatsapi = data.snseatsapi;
 
 		var jade = require('jade');
 		var fn = jade.compileFile('./views/deploy.tpl.jade');
@@ -54,6 +54,7 @@ module.exports = function(robot) {
 		addRow('TacoStand', tacostand);
 		addRow('SQL', sql);
 		addRow('SNSeats', snseats);
+		addRow('SNSeats API', snseatsapi);
 		addRow('SNappier', snappier);
 		addRow('SNWebAPI', snwebapi);
 		addRow('Tag', tag);
