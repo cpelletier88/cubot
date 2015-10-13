@@ -6,7 +6,7 @@ module.exports = function(robot) {
     });
 
     robot.hear(/jose/i, function (res) {
-        res.reply("(trolljose)");
+        res.send("@CudaJoe (trolljose)");
     })
 
     // robot.respond(/you suck/i, function(res) {
