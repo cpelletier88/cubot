@@ -7,7 +7,14 @@ module.exports = function(robot) {
 
     robot.hear(/jose/i, function (res) {
         res.send("@CudaJoe (trolljose)");
-    })
+    });
+
+    robot.respond(/jose bomb( (\d+))?/i, function (msg) {
+        var count = msg.match[2] || 5;
+        for(var i = 0; i < count; i++) {
+            msg.send("@CudaJoe (trolljose)");
+        }
+    });
 
     // robot.respond(/you suck/i, function(res) {
     // 	res.reply("\n\n....................../´¯/)\n....................,/¯../\n.................../..../\n............./´¯¯¯/'...'/´¯¯¯/`\n........../'/.../..../....././¨¯\\\n........('(...´...´.... ¯~/'...')\n.........\\.................'...../\n..........\\.................../\n............\\..............(\n..............\\.............\\....");
