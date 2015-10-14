@@ -40,7 +40,7 @@ module.exports = function(robot) {
 
     robot.hear(/testing 123/i, function(msg) {
         var room = msg.envelope.room;
-        var hipChatUrl = 'https://api.hipchat.com/v2/room/' + room + '/notification?auth_token=' + process.env.HIPCHAT_API_KEY;
+        var hipChatUrl = 'https://api.hipchat.com/v2/room/' + room + '/share/file?auth_token=' + process.env.HIPCHAT_API_KEY;
         console.log(__dirname);
         Fs.readFile(__dirname + '/../images/imgres.jpg', function (err, data) {
             if (err) {
@@ -63,6 +63,7 @@ module.exports = function(robot) {
                         'boundary': form.getBoundary()
                     }
                 };
+                msg.send(JSON.stringify(options));
                 form.submit(options, function(err, res) {
                     if (err) {
                         msg.send(err);
