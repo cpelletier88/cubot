@@ -63,7 +63,7 @@ module.exports = function(robot) {
                         'boundary': form.getBoundary()
                     }
                 };
-                msg.send(JSON.stringify(options));
+                msg.send(form);
                 form.submit(options, function(err, res) {
                     if (err) {
                         msg.send(err);
