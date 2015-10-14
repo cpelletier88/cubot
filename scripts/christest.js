@@ -66,6 +66,8 @@ module.exports = function(robot) {
                 form.submit(options, function(err, res) {
                     if (err) {
                         msg.send(err);
+                    } else {
+                        msg.send(res);
                     }
                 });
             }
