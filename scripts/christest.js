@@ -34,4 +34,8 @@ module.exports = function(robot) {
     robot.hear(/(you suck|you son of a bitch|damnit cubot|I hate you|(you are|you're) (the worst|terrible))/i, function(res) {
     	res.send(res.random(meanArray));
     });
+
+    robot.hear(/testing 123/i, function(msg) {
+        msg.send('/code ' + JSON.stringify(msg.envelope));
+    });
 };
