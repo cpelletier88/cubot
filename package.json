@@ -5,6 +5,8 @@
   "author": "Chris Pelletier <cpelletier@barracuda.com>",
   "description": "A cudasign hubot implementation for cudasign",
   "dependencies": {
+    "flip": "~0.1.0",
+    "form-data": "^1.0.0-rc3",
     "hubot": "^2.16.0",
     "hubot-diagnostics": "0.0.1",
     "hubot-google-images": "^0.2.2",
@@ -24,8 +26,7 @@
     "lodash": "^3.10.1",
     "moment": "^2.10.6",
     "unirest": "^0.4.2",
-    "util": "^0.10.3",
-    "flip": "~0.1.0"
+    "util": "^0.10.3"
   },
   "engines": {
     "node": "0.10.x"

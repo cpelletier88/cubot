@@ -36,7 +36,7 @@ module.exports = function(robot) {
     });
 
     robot.hear(/testing 123/i, function(msg) {
-        var roomId = msg.envelope.user.reply_to.split('_')[0];
-        msg.send('/code ' + JSON.stringify(roomId));
+        var room = msg.envelope.room;
+        msg.send('/code ' + JSON.stringify(room));
     });
 };
