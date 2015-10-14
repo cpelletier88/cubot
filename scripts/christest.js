@@ -1,4 +1,7 @@
 var _ = require('lodash');
+var Fs = require('fs');
+var FormData = require('form-data');
+var url = require('url');
 
 module.exports = function(robot) {
     robot.hear(/\(tableflip\)/i, function(res) {
@@ -37,6 +40,35 @@ module.exports = function(robot) {
 
     robot.hear(/testing 123/i, function(msg) {
         var room = msg.envelope.room;
-        msg.send('/code ' + JSON.stringify(room));
+        var hipChatUrl = 'https://api.hipchat.com/v2/room/' + room + '/notification?auth_token=' + process.env.HIPCHAT_API_KEY;
+        console.log(__dirname);
+        Fs.readFile(__dirname + '/../images/imgres.jpg', function (err, data) {
+            if (err) {
+                msg.send(err);
+            } else  {
+                var form = new FormData();
+                form.append('metadata', '{"message": "Vamos a tener una fiesta"}', {
+                    contentType: 'application/json'
+                });
+                form.append('file', data, {
+                    contentType: 'image/jpg',
+                    filename: 'imgres.jpg'
+                });
+                var parsed = url.parse(hipChatUrl);
+                var options = {
+                    host: parsed.hostname,
+                    path: parsed.path,
+                    headers: {
+                        'Content-Type': 'multipart/related',
+                        'boundary': form.getBoundary()
+                    }
+                };
+                form.submit(options, function(err, res) {
+                    if (err) {
+                        msg.send(err);
+                    }
+                });
+            }
+        });
     });
 };
