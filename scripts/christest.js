@@ -38,40 +38,39 @@ module.exports = function(robot) {
     	res.send(res.random(meanArray));
     });
 
-    robot.hear(/testing 123/i, function(msg) {
-        var room = msg.envelope.room;
-        var hipChatUrl = 'https://api.hipchat.com/v2/room/' + room + '/share/file?auth_token=' + process.env.HIPCHAT_API_KEY;
-        console.log(__dirname);
-        Fs.readFile(__dirname + '/../images/imgres.jpg', function (err, data) {
-            if (err) {
-                msg.send(err);
-            } else  {
-                var form = new FormData();
-                form.append('metadata', '{"message": "Vamos a tener una fiesta"}', {
-                    contentType: 'application/json'
-                });
-                form.append('file', data, {
-                    contentType: 'image/jpg',
-                    filename: 'imgres.jpg'
-                });
-                var parsed = url.parse(hipChatUrl);
-                var options = {
-                    host: parsed.hostname,
-                    path: parsed.path,
-                    headers: {
-                        'Content-Type': 'multipart/related',
-                        'boundary': form.getBoundary()
-                    }
-                };
-                msg.send(form);
-                form.submit(options, function(err, res) {
-                    if (err) {
-                        msg.send(err);
-                    } else {
-                        msg.send(res);
-                    }
-                });
-            }
-        });
-    });
+    // robot.hear(/testing 123/i, function(msg) {
+    //     var room = msg.envelope.room;
+    //     var hipChatUrl = 'https://api.hipchat.com/v2/room/' + room + '/share/file?auth_token=' + process.env.HIPCHAT_API_KEY;
+    //     console.log(__dirname);
+    //     Fs.readFile(__dirname + '/../images/imgres.jpg', function (err, data) {
+    //         if (err) {
+    //             msg.send(err);
+    //         } else  {
+    //             var form = new FormData();
+    //             form.append('metadata', '{"message": "Vamos a tener una fiesta"}', {
+    //                 contentType: 'application/json'
+    //             });
+    //             form.append('file', data, {
+    //                 contentType: 'image/jpg',
+    //                 filename: 'imgres.jpg'
+    //             });
+    //             var parsed = url.parse(hipChatUrl);
+    //             var options = {
+    //                 host: parsed.hostname,
+    //                 path: parsed.path,
+    //                 headers: {
+    //                     'Content-Type': 'multipart/related',
+    //                     'boundary': form.getBoundary()
+    //                 }
+    //             };
+    //             form.submit(options, function(err, res) {
+    //                 if (err) {
+    //                     msg.send(err);
+    //                 } else {
+    //                     msg.send(res);
+    //                 }
+    //             });
+    //         }
+    //     });
+    // });
 };
