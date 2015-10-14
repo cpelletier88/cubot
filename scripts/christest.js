@@ -11,8 +11,8 @@ module.exports = function(robot) {
 
     robot.respond(/jose bomb( (\d+))?/i, function (msg) {
         var count = msg.match[2] || 5;
-        for(var i = 0; i < count; i++) {
-            msg.send("@CudaJoe (trolljose)");
+        for(var i = 0; i < count - 1; i++) {
+            msg.send("(trolljose)");
         }
     });
 
