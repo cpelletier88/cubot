@@ -41,7 +41,7 @@ module.exports = function(robot) {
 
 		function addRow(name, value) {
 			if(value) {
-				deploymentRequest +='<tr><td>' + name + '</td><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td>' + value.toLowerCase() + '</td></tr>';
+				deploymentRequest +='<tr><td>' + name + '</td><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td>' + value + '</td></tr>';
 			}
 		}
 
