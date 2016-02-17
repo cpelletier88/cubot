@@ -28,7 +28,7 @@ module.exports = function (robot) {
   robot.hear(/(smash)|(ⓢⓜⓐⓢⓗ)|sm\(ashto|(s|ⓢ)(m|ⓜ)(a|ⓐ|\(a)(s|ⓢ)(h|ⓗ)/i, function (msg) {
     if (msg.message.room === 'super_smash_brothers') {
       var moment = require('moment');
-      var now = moment().subtract(7, 'hours')
+      var now = moment().subtract(8, 'hours')
       var hours = now.hours();
       var minutes = now.minutes();
 
