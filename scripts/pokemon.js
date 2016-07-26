@@ -34,7 +34,9 @@ module.exports = function(robot) {
     			return poke.pokemon_name;
     		})
 
-    		res.reply('There are ' + nearbyPokemon.length + ' pokemon nearby. (' + nearbyNames.join(', ') + ') - ' + process.env.POKEMON_PATH);
+    		var grammars = nearbyPokemon.length === 1 ? 'is' : 'are';
+
+    		res.reply('There ' + grammars + ' ' + nearbyPokemon.length + ' pokemon nearby. (' + nearbyNames.join(', ') + ') - ' + process.env.POKEMON_PATH);
     	});
     });
 };
