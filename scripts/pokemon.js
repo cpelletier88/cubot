@@ -11,24 +11,27 @@ var _ = require('lodash');
 
 module.exports = function(robot) {
 
+	function getPokemonInArea(pokemons, area) {
+		var nearbyPokemon = _.filter(pokemons, function(pokemon) {
+			return (pokemon.latitude < area[0][0] && pokemon.latitude > area[1][0]) && 
+				(pokemon.longitude > area[0][1] && pokemon.longitude < area[1][1]);
+
+		});
+
+		return nearbyPokemon;
+	}
+
     robot.hear(/nearby pokemon/i, function(res) {
     	var Request = unirest.get(process.env.POKEMON_PATH + '/raw_data');
     	Request.header('Accept', 'application/json').end(function (response) {
     		var responseJSON = JSON.parse(response.raw_body);
     		var pokemons = responseJSON.pokemons;
-    		// walking distance 
-    		// 33.621166, -117.926035
-    		// 33.619300, -117.924680
     		
-    		33.619997, -117.9254036
-
-    		var nearbyPokemon = _.filter(pokemons, function(pokemon) {
-    			return (pokemon.latitude > 33.619300 && pokemon.latitude < 33.621166) && 
-    				(pokemon.longitude > -117.926035 && pokemon.longitude < -117.924680);
-
-    		});
-
-    		console.log(nearbyPokemon);
+    		// walking distance 
+    		var top_left = [33.621166, -117.926035];
+    		var bottom_right = [33.619470, -117.924575];
+    		
+    		var nearbyPokemon = getPokemonInArea(pokemons, [top_left, bottom_right]);
 
     		var nearbyNames = _.map(nearbyPokemon, function(poke) {
     			return poke.pokemon_name;
@@ -36,7 +39,11 @@ module.exports = function(robot) {
 
     		var grammars = nearbyPokemon.length === 1 ? 'is' : 'are';
 
-    		res.reply('There ' + grammars + ' ' + nearbyPokemon.length + ' pokemon nearby. (' + nearbyNames.join(', ') + ') - ' + process.env.POKEMON_PATH);
+    		if (nearByNames.length) {
+    			res.send('There ' + grammars + ' ' + nearbyPokemon.length + ' pokemon nearby. (' + nearbyNames.join(', ') + ') - ' + process.env.POKEMON_PATH);
+    		} else {
+    			res.send('There are no pokemon nearby =(')
+    		}
     	});
     });
 };
