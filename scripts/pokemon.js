@@ -12,7 +12,7 @@ var _ = require('lodash');
 module.exports = function(robot) {
 
     robot.hear(/nearby pokemon/i, function(res) {
-    	var Request = unirest.get(process.env.POKEMON_PATH' + /raw_data);
+    	var Request = unirest.get(process.env.POKEMON_PATH + '/raw_data');
     	Request.header('Accept', 'application/json').end(function (response) {
     		var responseJSON = JSON.parse(response.raw_body);
     		var pokemons = responseJSON.pokemons;
