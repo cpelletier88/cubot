@@ -45,4 +45,8 @@ module.exports = function(robot) {
     		}
     	});
     });
+
+    robot.hear(/should i transfer my dragonair/i, function(res) {
+    	res.send('WWCPD?');
+    });
 };
