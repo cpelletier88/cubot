@@ -32,14 +32,13 @@ module.exports = function(robot) {
     		var bottom_right = [33.619470, -117.924575];
     		
     		var nearbyPokemon = getPokemonInArea(pokemons, [top_left, bottom_right]);
-
     		var nearbyNames = _.map(nearbyPokemon, function(poke) {
     			return poke.pokemon_name;
     		})
 
     		var grammars = nearbyPokemon.length === 1 ? 'is' : 'are';
 
-    		if (nearByNames.length) {
+    		if (nearbyPokemon.length) {
     			res.send('There ' + grammars + ' ' + nearbyPokemon.length + ' pokemon nearby. (' + nearbyNames.join(', ') + ') - ' + process.env.POKEMON_PATH);
     		} else {
     			res.send('There are no pokemon nearby =(')
