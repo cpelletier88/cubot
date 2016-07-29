@@ -10,12 +10,18 @@ var unirest = require('unirest');
 var _ = require('lodash');
 
 module.exports = function(robot) {
+	// walking distance 
+	var top_left = [33.621166, -117.926035];
+	var bottom_right = [33.619470, -117.924575];
+
+	function isInArea(pokemon, area) {
+		return (pokemon.latitude < area[0][0] && pokemon.latitude > area[1][0]) && 
+			(pokemon.longitude > area[0][1] && pokemon.longitude < area[1][1]);
+	}
 
 	function getPokemonInArea(pokemons, area) {
 		var nearbyPokemon = _.filter(pokemons, function(pokemon) {
-			return (pokemon.latitude < area[0][0] && pokemon.latitude > area[1][0]) && 
-				(pokemon.longitude > area[0][1] && pokemon.longitude < area[1][1]);
-
+			isInArea(pokemon, area);
 		});
 
 		return nearbyPokemon;
@@ -26,11 +32,7 @@ module.exports = function(robot) {
     	Request.header('Accept', 'application/json').end(function (response) {
     		var responseJSON = JSON.parse(response.raw_body);
     		var pokemons = responseJSON.pokemons;
-    		
-    		// walking distance 
-    		var top_left = [33.621166, -117.926035];
-    		var bottom_right = [33.619470, -117.924575];
-    		
+    		    		
     		var nearbyPokemon = getPokemonInArea(pokemons, [top_left, bottom_right]);
     		var nearbyNames = _.map(nearbyPokemon, function(poke) {
     			return poke.pokemon_name;
@@ -45,6 +47,30 @@ module.exports = function(robot) {
     		}
     	});
     });
+
+    robot.router.post('/hubot/pokeman_sighting', function(req, res) {
+		var data;
+		data = req.body.payload != null ? JSON.parse(req.body.payload) : req.body;
+		var pokemon;
+
+		if (data.type === 'pokemon') {
+			pokemon = data.message;
+
+			if (isInArea(pokemon, [top_left, bottom_right])) {
+				var data = JSON.stringify({
+		    		color: 'green',
+		    		message: pokemon_id + ' just spawned by the office',
+		    		notify: 'true',
+		    		message_format: 'html'
+		    	});
+
+				robot.http('https://api.hipchat.com/v2/room/1610182/notification?auth_token=' + process.env.DEPLOY_HIPCHAT_API_KEY)
+					.header('Content-Type', 'application/json')
+					.post(data)(function(err, res, body) {
+					});				
+			}
+		}
+	});
 
     robot.hear(/should i transfer my dragonair/i, function(res) {
     	res.send('WWCPD?');
