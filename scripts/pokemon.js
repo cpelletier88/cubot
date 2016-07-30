@@ -27,7 +27,7 @@ module.exports = function(robot) {
 
 		console.log('is in area', (latitude < area[0][0] && latitude > area[1][0]) && 
 			(longitude > area[0][1] && longitude < area[1][1]));
-		
+
 		return (latitude < area[0][0] && latitude > area[1][0]) && 
 			(longitude > area[0][1] && longitude < area[1][1]);
 	}
@@ -64,7 +64,7 @@ module.exports = function(robot) {
     robot.router.post('/hubot/pokeman_sighting', function(req, res) {
 		var data;
 		data = req.body.payload != null ? JSON.parse(req.body.payload) : req.body;
-		console.log(data);
+		console.log(data, data.type);
 
 		if (data.type === 'pokemon') {
 			var pokemon = data.message;
