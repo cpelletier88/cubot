@@ -24,6 +24,9 @@ module.exports = function(robot) {
 				c = parseFloat(c);
 			}
 		});
+
+		console.log('is in area', (latitude < area[0][0] && latitude > area[1][0]) && 
+			(longitude > area[0][1] && longitude < area[1][1]));
 		
 		return (latitude < area[0][0] && latitude > area[1][0]) && 
 			(longitude > area[0][1] && longitude < area[1][1]);
