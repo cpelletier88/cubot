@@ -52,10 +52,10 @@ module.exports = function(robot) {
     robot.router.post('/hubot/pokeman_sighting', function(req, res) {
 		var data;
 		data = req.body.payload != null ? JSON.parse(req.body.payload) : req.body;
-		var pokemon;
-
+		console.log(data);
+		
 		if (data.type === 'pokemon') {
-			pokemon = data.message;
+			var pokemon = data.message;
 
 			if (isInArea(pokemon, [top_left, bottom_right])) {
 				var data = JSON.stringify({
