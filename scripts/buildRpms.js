@@ -15,7 +15,7 @@ module.exports = function(robot) {
 		var snappierBranch = branches[0].trim();
 		var webapiBranch = branches[0].trim();
 
-    	if (snappierBranch === undefined || webapiBranch === undefined) {
+    	if (!snappierBranch|| !webapiBranch) {
     		res.reply('You did not provide both branches.');
     	} else {
 			var endpoint;
@@ -29,15 +29,15 @@ module.exports = function(robot) {
 
 			unirest.post(endpoint + webapi)
 					.header('Authorization', 'Basic ' + process.env.JENKINS_API_KEY)
-					.send(data)
+					.send()
 					.end(function(response) {
 						unirest.post(endpoint + snappier1)
 								.header('Authorization', 'Basic ' + process.env.JENKINS_API_KEY)
-								.send(data)
+								.send()
 								.end(function(response) {
 									unirest.post(endpoint + snappier2)
 											.header('Authorization', 'Basic ' + process.env.JENKINS_API_KEY)
-											.send(data)
+											.send()
 											.end(function(response) {
 												res.reply('done');
 											});
