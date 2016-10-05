@@ -40,8 +40,8 @@ module.exports = function(robot) {
 											.send(data)
 											.end(function(response) {
 												res.reply('done');
-											}
-								}
+											});
+								});
 					});
     	}
 	});
