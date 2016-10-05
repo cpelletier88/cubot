@@ -65,6 +65,9 @@ module.exports = function(robot) {
 
 			bundleRequests(requests).then(function(response) {
 				res.send(JSON.stringify(response));
+				res.send(process.env.JENKINS_USERNAME);
+				res.send(process.env.JENKINS_API_KEY);
+				res.send(process.env.JENKINS_URL);
 				res.reply('Builds queued up!');
 			});
     	}
