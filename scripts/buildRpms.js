@@ -40,15 +40,14 @@ function bundleRequests(requests) {
 
 module.exports = function(robot) {   
 	robot.respond(/build-dev (.*)/i, function(res) {
-		var branches = res.match[1].trim().split(',');
+		var branches = res.match[1];
 
-
-		var snappierBranch = branches[0].trim();
-		var webapiBranch = branches[0].trim();
-
-		if (branches.length < 2) {
+		if (!branches || branches.trim().split(',').length < 2) {
 			res.reply('Not enough parameters supplied.  Expecting snappierbranch,webapibranch');
     	} else {
+       		var snappierBranch = branches.trim().split(',')[0].trim();
+    		var webapiBranch = branches.trim().split(',')[1].trim();
+	
 			var requests = [
 				{
 					job: 'SignNow_SNAppier_Dev_Deploy',
@@ -64,22 +63,21 @@ module.exports = function(robot) {
 				}
 			];
 
-			bundleRequests(requests).then(function() {
+			bundleRequests(requests).then(function(response) {
+				res.send(JSON.stringify(response));
 				res.reply('Builds queued up!');
 			});
     	}
 	});
 
 	robot.respond(/build-stage (.*)/i, function(res) {
-		var branches = res.match[1].trim().split(',');
-
-
-		var snappierBranch = branches[0].trim();
-		var webapiBranch = branches[0].trim();
-
-		if (branches.length < 2) {
+		var branches = res.match[1];
+		
+		if (!branches || branches.trim().split(',').length < 2) {
 			res.reply('Not enough parameters supplied.  Expecting snappierbranch,webapibranch');
     	} else {
+    		var snappierBranch = branches.trim().split(',')[0].trim();
+    		var webapiBranch = branches.trim().split(',')[1].trim();
 			var requests = [
 				{
 					job: 'CudaSign_SNAppier_Stage_Deploy',
@@ -114,15 +112,14 @@ module.exports = function(robot) {
 	});
 
 	robot.respond(/build-rpms (.*)/i, function(res) {
-		var branches = res.match[1].trim().split(',');
+		var branches = res.match[1];
 
-
-		var snappierBranch = branches[0].trim();
-		var webapiBranch = branches[0].trim();
-
-		if (branches.length < 2) {
+		if (branches = undefined || !branches || branches.length < 2) {
 			res.reply('Not enough parameters supplied.  Expecting snappierbranch,webapibranch');
     	} else {
+    		var snappierBranch = branches.trim().split(',')[0].trim();
+    		var webapiBranch = branches.trim().split(',')[1].trim();
+
 			var requests = [
 				{
 					job: 'SNAppier_Builder_v2',
