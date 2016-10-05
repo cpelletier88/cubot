@@ -22,7 +22,7 @@ module.exports = function(robot) {
 			
 			endpoint = process.env.JENKINS_URL;
 
-			var webapi = 'view/WebAPI/job/WebAPI_Builder_v2/buildWithParameters?WebApiBranch=' + webapiBranch;
+			var webapi = '/view/WebAPI/job/WebAPI_Builder_v2/buildWithParameters?WebApiBranch=' + webapiBranch;
 			var snappier1 = '/view/WebAPI/job/SNAppier_Builder_v2/buildWithParameters?Build_Target_Env=qa&SNAppierBranch=' + snappierBranch;
 			var snappier2 = '/view/WebAPI/job/SNAppier_Builder_v2/buildWithParameters?Build_Target_Env=rc-sn&SNAppierBranch=' + snappierBranch;
 			
